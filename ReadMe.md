@@ -1,1 +1,6 @@
+## When knowledge meets infection, ties break: a multiplex approach to behavioral compliance
 
+### Adjust_Main.py.
+<p align="justify">
+This code simulates an iterative learning framework for a disease progression network (GENIE-style model) using synthetic patient trajectories generated as random walks on a weighted directed graph. At each iteration, it constructs patient-level transition frequencies from simulated disease sequences, aggregates them into a temporary observation network, and updates the underlying disease graph by reinforcing frequently observed transitions while conserving total edge weight through compensatory down-weighting of unobserved edges. The model thereby performs a dynamic, data-driven refinement of disease–disease relationships based on simulated longitudinal patient behavior. Over repeated updates, the algorithm tracks convergence between the evolving learned network and the original ground-truth structure using Kendall’s Tau and Pearson correlation, providing quantitative measures of structural recovery. This allows evaluation of how well the iterative update mechanism reconstructs the underlying disease transition dynamics from trajectory data, and how parameters such as update rate (delta) and decay influence stability and convergence behavior.
+</p>
