@@ -34,3 +34,8 @@ This code simulates an iterative learning framework for a disease progression ne
 <p align="justify">
 The visualization displays disease trajectories organized into clusters, where each row represents a clinically meaningful disease subtype inferred from GENIE-based network analysis. Within each cluster, diseases are arranged sequentially and connected with directed arrows to illustrate typical temporal progression patterns observed across pseudo-patient trajectories. Node boxes are rendered with clear spacing, high-contrast styling, and controlled layout to ensure interpretability even in dense clusters. Arrows are intentionally drawn beneath the boxes to preserve readability while still emphasizing directional disease evolution within each subtype.
 </p>
+
+### Parse.py; Naming.py.
+<p align="justify">
+This code constructs an ICD-9 category mapping by parsing a tab-separated range-to-label file and serializing it for later use in disease ontology alignment. It then loads GENIE-derived gene/disease graphs, compares the original and trimmed networks using node-label mappings, and identifies edges that are present in the trimmed graph but absent in the original GENIE network.
+</p>
