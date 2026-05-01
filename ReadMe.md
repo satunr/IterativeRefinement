@@ -1,5 +1,10 @@
 ## Evolving Disease Progression Networks through Incremental Refinement
 
+### Read_Diagnosis.py.
+<p align="justify">
+This code preprocesses the MIMIC-3 diagnosis dataset into a patient–disease binary incidence matrix, where rows represent patients and columns represent ICD9-coded diseases. It filters out inactive or uninformative disease columns and constructs a clean input representation suitable for downstream modeling. The processed matrix is then fed into GENIE3 to infer a weighted disease–disease interaction network based on co-occurrence structure across patients. The resulting network captures latent dependencies among diseases and is saved for subsequent trajectory modeling and clustering analyses.
+</p>
+
 ### Cond.py.
 <p align="justify">
 This code analyzes disease–disease relationships by combining clinical co-occurrence structure with a learned GENIE network. It clusters diseases using hierarchical clustering on a symmetrized gene–gene interaction matrix (GENIE weights), and visualizes the resulting hierarchy as a dendrogram. In parallel, it constructs empirical disease co-occurrence probabilities from diagnosis data and maps ICD9 codes into coarse categories for higher-level clinical grouping. Finally, it evaluates how well the learned GENIE edge weights align with real-world conditional disease associations by binning edges by weight and computing the average conditional probability within each bin. The resulting plot shows whether stronger inferred GENIE connections correspond to higher observed clinical co-occurrence, providing a validation of the network’s biological and clinical interpretability.
