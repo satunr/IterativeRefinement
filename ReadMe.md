@@ -1,4 +1,4 @@
-## When knowledge meets infection, ties break: a multiplex approach to behavioral compliance
+## Evolving Disease Progression Networks through Incremental Refinement
 
 ### Cond.py.
 <p align="justify">
