@@ -10,6 +10,11 @@ This code preprocesses the MIMIC-3 diagnosis dataset into a patient–disease bi
 This code analyzes disease–disease relationships by combining clinical co-occurrence structure with a learned GENIE network. It clusters diseases using hierarchical clustering on a symmetrized gene–gene interaction matrix (GENIE weights), and visualizes the resulting hierarchy as a dendrogram. In parallel, it constructs empirical disease co-occurrence probabilities from diagnosis data and maps ICD9 codes into coarse categories for higher-level clinical grouping. Finally, it evaluates how well the learned GENIE edge weights align with real-world conditional disease associations by binning edges by weight and computing the average conditional probability within each bin. The resulting plot shows whether stronger inferred GENIE connections correspond to higher observed clinical co-occurrence, providing a validation of the network’s biological and clinical interpretability.
 </p>
 
+### Heatmap.py.
+<p align="justify">
+This pipeline performs hierarchical clustering on a GENIE3-derived gene–disease association matrix after symmetrizing and converting it into a distance space via an exponential transform. It then evaluates cluster quality by mapping ICD9-based disease groupings onto clusters, computing concordance between biological taxonomy and learned structure, and visualizing cluster-wise ICD9 enrichment via heatmaps.
+</p>
+
 ### gmlGraph_kneePlot.py; kneePoint.py.
 <p align="justify">
 The Kneedle algorithm is used to automatically detect the “elbow point” in the sorted distribution of GENIE edge weights, where the curve transitions from steep (informative, high-confidence edges) to flat (noisy or low-signal edges). This point is identified by measuring the maximum deviation between the normalized weight curve and a reference diagonal, effectively capturing where marginal gains in retained structure begin to diminish. By thresholding at this elbow, the GENIE network can be sparsified in a data-driven way that preserves structurally meaningful edges while removing weak, less informative connections.
