@@ -1,5 +1,10 @@
 ## Evolving Disease Progression Networks through Incremental Refinement
 
+### Genie.py.
+<p align="justify">
+GENIE3 is a tree-based ensemble method that infers a gene regulatory network by treating each gene as a target and learning how well all other genes (potential regulators) can predict its expression using Random Forest or Extra-Trees models. The resulting feature importances from all target-specific models are aggregated into a weighted adjacency matrix, where each entry represents a directed regulatory influence score between gene pairs.
+</p>
+
 ### Read_Diagnosis.py.
 <p align="justify">
 This code preprocesses the MIMIC-3 diagnosis dataset into a patient–disease binary incidence matrix, where rows represent patients and columns represent ICD9-coded diseases. It filters out inactive or uninformative disease columns and constructs a clean input representation suitable for downstream modeling. The processed matrix is then fed into GENIE3 to infer a weighted disease–disease interaction network based on co-occurrence structure across patients. The resulting network captures latent dependencies among diseases and is saved for subsequent trajectory modeling and clustering analyses.
