@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import scipy.cluster.hierarchy as sch
 from sklearn.cluster import AgglomerativeClustering
 from scipy.spatial.distance import squareform
+from sklearn.preprocessing import normalize
 
 from copy import deepcopy
 from Func import *
@@ -85,10 +86,10 @@ def cond_prob(A):
 
     for i in range(len(A)):
         l = deepcopy(A[i, :]).tolist()
-        indices = [i for i in range(len(l)) if l[i] == 1]
+        indices = [j for j in range(len(l)) if l[j] == 1]
 
         for j in range(len(indices) - 1):
-            for k in range(len(indices)):
+            for k in range(j + 1, len(indices)):
                 C[indices[j], indices[k]] += 1
                 C[indices[k], indices[j]] += 1
 
@@ -142,19 +143,26 @@ print (D[:5, :5])
 pickle.dump([D, Diseases], open('Cond.p', 'wb'))
 '''
 
-# [A, Diseases, _, VIM3] = pickle.load(open('/Users/sr0215/Python/Clinical/Bayes/Refinement/VIM3.p', 'rb'))
+[A, Diseases, _, VIM3] = pickle.load(open('/Users/sr0215/Python/Clinical/Bayes/Refinement/VIM3.p', 'rb'))
+# print(A[:15, :10])
+
 # G = create_gml(VIM3, Diseases)
 # pickle.dump(G, open('GENIE.p', 'wb'))
-
+#
 # nx.write_gml(G, 'GENIE.gml')
 # exit(1)
+#
+G = pickle.load(open('GENIE.p', 'rb'))
+print(G)
 
-# G = pickle.load(open('GENIE.p', 'rb'))
-# print(G)
-
-'''
-Diseases = list(G.nodes())
+# Diseases = list(G.nodes())
 C = cond_prob(A)
+
+# # Generate conditional network graph
+# # C = deepcopy(normalize(C, axis=1, norm='l1'))
+# I = nx.from_numpy_array(C, create_using=nx.DiGraph)
+# print(I)
+# nx.write_gml(I, 'Cond.gml')
 # exit(1)
 
 # Find conditional probability
@@ -170,6 +178,9 @@ for i in range(len(Diseases)):
         else:
             Y.append(0)
 
+Y = np.array(Y)
+
+
 # Plot conditional probability
 ranges = np.linspace(0, max(X), 5).tolist()
 # print (ranges)
@@ -184,7 +195,6 @@ for i in range(len(X)):
             break
 # print ({key: np.mean(Dic[key]) for key in sorted(Dic.keys())})
 pickle.dump(Dic, open('Cond_dic.p', 'wb'))
-'''
 
 Dic = pickle.load(open('Cond_dic.p', 'rb'))
 keys = sorted(Dic.keys())
@@ -201,3 +211,4 @@ plt.ylabel('Conditional probability', fontsize=15)
 plt.tight_layout()
 plt.savefig('/Users/sr0215/Python/Clinical/Bayes/Refinement/Cond.png', dpi=150)
 plt.show()
+
