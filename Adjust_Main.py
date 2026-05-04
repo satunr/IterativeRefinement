@@ -53,7 +53,7 @@ how_many_patients_ = 50
 
 # Disease network
 length_of_sequence = 25
-delta, decay = 0.05, 0.975
+delta, decay = 0.3, 0.9999
 # Default: delta, decay = 0.05, 0.9985
 
 # Ground truth network
@@ -72,7 +72,12 @@ G0 = create_gml(VIM3, Diseases)
 n = len(G0)
 '''
 
-G0 = nx.read_gml('GENIE_trimmed.gml')
+'''
+# G0 = nx.read_gml('GENIE_trimmed.gml')
+# print (G0)
+G0 = nx.read_gml('Cond_trimmed.gml')
+print (G0)
+
 # G0 = sparsify(G0)
 # Gcc = sorted(nx.connected_components(G0.to_undirected()), key=len, reverse=True)
 # G0 = G0.subgraph(Gcc[0])
@@ -193,10 +198,12 @@ while rep < Repeat:
     # plt.tight_layout()
     # plt.savefig('Runtime.png', dpi=150)
     # # plt.show()
-exit(1)
 
 # pickle.dump([Log, Log_corr, Runtime_a, Runtime_o], open('Adjust.p', 'wb'))
-
+pickle.dump([Log, Log_corr, Runtime_a, Runtime_o], open('Adjust_cond.p', 'wb'))
+exit(1)
+'''
+'''
 # [Log, Log_corr, Runtime_a, Runtime_o] = pickle.load(open('Adjust.p', 'rb'))
 
 print (Log[-1][1], np.std([Log[i][1] for i in range(len(Log))]))
@@ -224,7 +231,7 @@ print (Log_corr[-1][1], np.std([Log_corr[i][1] for i in range(len(Log_corr))]))
 
 '''
 # Visualize
-[Log, Log_corr, Runtime_a, Runtime_o] = pickle.load(open('Adjust.p', 'rb'))
+[Log, Log_corr, Runtime_a, Runtime_o] = pickle.load(open('Adjust_cond.p', 'rb'))
 print (f'Runtime is {np.mean(list(Runtime_o.values()))} +- {np.std(list(Runtime_o.values()))}')
 # Runtime is 1.0823779117067656 +- 1.0248641376996164
 
@@ -251,6 +258,5 @@ ax2.set_ylabel("Pearson correlation coefficient", color='g')
 
 # plt.title(f'Pearson correlation coefficient is {PCC}')
 plt.tight_layout()
-plt.savefig('/Users/sr0215/Python/Clinical/Bayes/Refinement/Adjust2.png', dpi=100)
+plt.savefig('/Users/sr0215/Python/Clinical/Bayes/Refinement/Adjust_cond.png', dpi=100)
 plt.show()
-'''
